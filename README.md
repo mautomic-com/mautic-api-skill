@@ -4,7 +4,6 @@
 
 > "List all contacts tagged VIP" / "Create a new segment for users with 100+ points" / "Send the welcome email to contact 42" -- just tell Claude what you need.
 
-[![Mautic](https://img.shields.io/badge/Mautic-4.x%20%7C%205.x-4e5e9e)](https://www.mautic.org/)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-cc785c)](https://docs.anthropic.com/en/docs/claude-code)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -42,10 +41,16 @@ A [Claude Code skill](https://docs.anthropic.com/en/docs/claude-code) that gives
 
 ### 1. Install the skill
 
-Copy this folder into your Claude Code skills directory:
+Ask Claude Code to install it directly from the repo:
+
+```
+Install skill from https://github.com/mautomic-com/mautic-api-skill
+```
+
+Or install manually:
 
 ```bash
-cp -r mautic-api ~/.claude/skills/mautic-api
+git clone https://github.com/mautomic-com/mautic-api-skill.git ~/.claude/skills/mautic-api
 ```
 
 ### 2. Configure credentials
@@ -60,19 +65,33 @@ The setup wizard will prompt for your Mautic URL, username, and password, then v
 
 ### 3. Start using it
 
-Open Claude Code and talk to it naturally:
+Open Claude Code and just describe what you need in plain English:
 
 ```
-/mautic contacts list --search "email:*@example.com"
+Create a contact jan@example.com, first name Jan, last name Kowalski
 ```
 
-Or just ask:
+```
+Export all VIP contacts to CSV
+```
 
 ```
 Show me all contacts tagged "VIP" who were active this week
 ```
 
+```
+Add contact 42 to the "Newsletter" segment
+```
+
+```
+Send the welcome email to contact 42
+```
+
+Claude understands your intent, builds the right API calls, and handles pagination, formatting, and exports automatically. No need to remember any syntax.
+
 ## Usage Examples
+
+For more control, you can also use specific commands with the `/mautic` prefix:
 
 ### Contact Management
 
@@ -183,7 +202,7 @@ The skill is a single bash script (`scripts/mautic-api.sh`) that wraps the entir
 
 ## Requirements
 
-- **Mautic** 4.x or 5.x with API enabled
+- **Mautic** tested with Mautic 7.x 
 - **Claude Code** (with skills support)
 - **curl** and **jq** (pre-installed on most systems)
 - Mautic user with API access (basic HTTP authentication)
